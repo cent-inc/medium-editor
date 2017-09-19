@@ -167,6 +167,7 @@
             var action = this.getAction();
 
             if (action) {
+                this.base.elements[0].focus();
                 this.execAction(action);
             }
         },
