@@ -6586,9 +6586,10 @@ MediumEditor.extensions = {};
     function handleTabKeydown(event) {
         // Override tab only for pre nodes
         var node = MediumEditor.selection.getSelectionStart(this.options.ownerDocument),
-            tag = node && node.nodeName.toLowerCase();
+            tag = node && node.nodeName.toLowerCase(),
+            parentTag = node && node.parentNode && node.parentNode.nodeName.toLowerCase();
 
-        if (tag === 'pre') {
+        if (tag === 'pre' || parentTag === 'pre') {
             event.preventDefault();
             MediumEditor.util.insertHTMLCommand(this.options.ownerDocument, '    ');
         }
