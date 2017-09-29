@@ -5346,7 +5346,7 @@ MediumEditor.extensions = {};
                 parentTag = node && node.parentNode && node.parentNode.nodeName.toLowerCase();
 
             if (tag === 'pre' || parentTag === 'pre') {
-                MediumEditor.util.htmlEntities(pastedPlain);
+                MediumEditor.util.insertHTMLCommand(this.document, MediumEditor.util.htmlEntities(pastedPlain));
                 return;
             }
 
