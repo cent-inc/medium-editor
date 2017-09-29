@@ -203,7 +203,7 @@
             aria: 'preformatted text',
             tagNames: ['pre'],
             contentDefault: '<b>0101</b>',
-            contentFA: '<i class="fa fa-code fa-lg"></i>'
+            contentFA: '<i class="fa fa-code"></i>'
         },
         'h1': {
             name: 'h1',
