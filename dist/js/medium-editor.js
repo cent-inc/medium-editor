@@ -5340,7 +5340,15 @@ MediumEditor.extensions = {};
         doPaste: function (pastedHTML, pastedPlain, editable) {
             var paragraphs,
                 html = '',
-                p;
+                p,
+                node = MediumEditor.selection.getSelectionStart(this.document),
+                tag = node && node.nodeName.toLowerCase(),
+                parentTag = node && node.parentNode && node.parentNode.nodeName.toLowerCase();
+
+            if (tag === 'pre' || parentTag === 'pre') {
+                MediumEditor.util.htmlEntities(pastedPlain);
+                return;
+            }
 
             if (this.cleanPastedHTML && pastedHTML) {
                 return this.cleanPaste(pastedHTML);
