@@ -2780,8 +2780,10 @@ MediumEditor.extensions = {};
                 case 'editableKeypress':
                     // Detecting keypress in the contenteditables
                     this.attachToEachElement('keypress', this.handleKeypress);
+                    break;
+                case 'editableKeypressSamsung':
                     // Android+Samsung keyCode issue; masks space
-                    this.attachToEachElement('textInput', this.handleKeypress);
+                    this.attachToEachElement('textInput', this.handleKeypressSamsung);
                     break;
                 case 'editableKeyup':
                     // Detecting keyup in the contenteditables
@@ -2987,6 +2989,22 @@ MediumEditor.extensions = {};
 
         handleKeypress: function (event) {
             this.triggerCustomEvent('editableKeypress', event, event.currentTarget);
+
+            // If we're doing manual detection of the editableInput event we need
+            // to check for input changes during 'keypress'
+            if (this.keypressUpdateInput) {
+                var eventObj = { target: event.target, currentTarget: event.currentTarget };
+
+                // In IE, we need to let the rest of the event stack complete before we detect
+                // changes to input, so using setTimeout here
+                setTimeout(function () {
+                    this.updateInput(eventObj.currentTarget, eventObj);
+                }.bind(this), 0);
+            }
+        },
+
+        handleKeypressSamsung: function (event) {
+            this.triggerCustomEvent('editableKeypressSamsung', event, event.currentTarget);
 
             // If we're doing manual detection of the editableInput event we need
             // to check for input changes during 'keypress'
