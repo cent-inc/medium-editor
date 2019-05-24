@@ -69,6 +69,6 @@
     "test": "node node_modules/grunt-cli/bin/grunt test --verbose",
     "test:ci": "node node_modules/grunt-cli/bin/grunt travis --verbose",
     "start": "open ./demo/index.html",
-    "build": "node node_modules/grunt-cli/bin/grunt"
+    "build": "node node_modules/grunt-cli/bin/grunt --force"
   }
 }

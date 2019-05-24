@@ -330,6 +330,8 @@
                 case 'editableKeypress':
                     // Detecting keypress in the contenteditables
                     this.attachToEachElement('keypress', this.handleKeypress);
+                    // Android+Samsung keyCode issue; masks space
+                    this.attachToEachElement('textInput', this.handleKeypress);
                     break;
                 case 'editableKeyup':
                     // Detecting keyup in the contenteditables
